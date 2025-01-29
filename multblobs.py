@@ -32,7 +32,6 @@ with Lepton() as camera:
 		contours, hierarchy = cv.findContours(frame, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 		cx_all = []
 		cy_all = []
-		#mask = np.zeros_like(frame)
 		blobthresh = 90
 		for contour in contours:
 			mask = np.zeros_like(frame)
@@ -44,6 +43,7 @@ with Lepton() as camera:
 			    cx_all.append(cX)
 			    cY = int(M["m01"] / M["m00"])
 			    cy_all.append(cY)
+		
 			    
 		simpleblobcolor = cv.cvtColor(frame, cv.COLOR_GRAY2RGB)
 		if len(cx_all) > 0:
