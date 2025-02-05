@@ -6,7 +6,7 @@ with Lepton() as camera:
   camera.setup_video()
 
   def select_roi(image):
-    image = cv2.cvtColor(image, cv.COLOR_GRAY2RGB)
+    image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
     roi_points = []
     def mouse_callback(event, x, y, flags, param):
       if event == cv.EVENT_LBUTTONDOWN:
