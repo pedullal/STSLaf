@@ -47,11 +47,11 @@ with Lepton() as camera:
 			    cx_all.append(cX)
 			    cY = int(M["m01"] / M["m00"])
 			    cy_all.append(cY)
-				  if len(cx_all)!=len(cx_old)
+				if len(cx_all)!=len(cx_old)
 					  cx_old = cx_all
 					  cy_old = cy_all
 					  first_run = False;
-			  	else
+				  else
 					  blob_velo = sqrt((cx_all-cx_old)^2+(cy_all-cy_old)^2)
 					  threshold = 7
 					  result = blob_velo[blob_velo < threshold] 
