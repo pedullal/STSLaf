@@ -40,25 +40,25 @@ with Lepton() as camera:
 			mask = np.zeros_like(frame)
 			contourSize = cv.contourArea(contour)
 			if contourSize > blobthresh:
-			    cv.fillPoly(mask,[contour],1)
-			    M = cv.moments(mask)
-			    cX = int(M["m10"] / M["m00"])
-			    cx_all.append(cX)
-			    cY = int(M["m01"] / M["m00"])
-			    cy_all.append(cY)
-			    if len(cx_all)!=len(cx_old):
-				 cx_old = cx_all
-				 cy_old = cy_all
-			    else:
+				cv.fillPoly(mask,[contour],1)
+				M = cv.moments(mask)
+				cX = int(M["m10"] / M["m00"])
+				cx_all.append(cX)
+				cY = int(M["m01"] / M["m00"])
+				cy_all.append(cY)
+				if len(cx_all)!=len(cx_old):
+					cx_old = cx_all
+					cy_old = cy_all
+				else:
 					blob_velo = sqrt((cx_all-cx_old)^2+(cy_all-cy_old)^2)
 					threshold = 7
 					result = blob_velo[blob_velo < threshold] 
 					if len(result)>=1:
 						B=0
-					  	R=255
-					  else:
-						  R=0
-						  B=255
+						R=255
+					else:
+						R=0
+						B=255
 					cx_old = cx_all
 					cy_old = cy_all
 				
