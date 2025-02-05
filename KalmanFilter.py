@@ -50,7 +50,7 @@ with Lepton() as camera:
   while True:
     # Read the current frame from the video.
     img = camera.grab().astype(np.float32)
-		T, threshold = cv2.threshold(img, 3000, 5000, cv2.THRESH_BINARY)
+    T, threshold = cv2.threshold(img, 3000, 5000, cv2.THRESH_BINARY)
 		img2 = 255*(img - img.min())/(img.max()-img.min())
 		imgu = img2.astype(np.uint8)
 
