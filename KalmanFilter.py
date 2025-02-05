@@ -4,7 +4,7 @@ from flirpy.camera.lepton import Lepton
 
 with Lepton() as camera:
   camera.setup_video()
-  def select_roi(image):
+	def select_roi(image):
 		image = cv.cvtColor(image, cv.COLOR_GRAY2RGB)
 		roi_points = []
 		def mouse_callback(event, x, y, flags, param):
