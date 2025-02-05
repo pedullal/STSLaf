@@ -51,16 +51,15 @@ with Lepton() as camera:
     # Read the current frame from the video.
     img = camera.grab().astype(np.float32)
     T, threshold = cv2.threshold(img, 3000, 5000, cv2.THRESH_BINARY)
-		img2 = 255*(img - img.min())/(img.max()-img.min())
-		imgu = img2.astype(np.uint8)
-
-		if FirstRunTest is True and imgu is not None:
-			masku = select_roi(imgu)
-			mask = masku.astype(np.float32)
-			FirstRunTest = False
-		if FirstRunTest is False:
-			masked = cv2.bitwise_and(threshold, mask)
-		frame = masked.astype(np.uint8)
+    img2 = 255*(img - img.min())/(img.max()-img.min())
+    imgu = img2.astype(np.uint8)
+    if FirstRunTest is True and imgu is not None:
+      masku = select_roi(imgu)
+      mask = masku.astype(np.float32)
+      FirstRunTest = False
+    if FirstRunTest is False:
+      masked = cv2.bitwise_and(threshold, mask)
+    frame = masked.astype(np.uint8)
 
     # Apply the KNN background subtractor to get the foreground mask.
     fg_mask = bg_subtractor.apply(frame)
