@@ -4,28 +4,28 @@ from flirpy.camera.lepton import Lepton
 
 with Lepton() as camera:
   camera.setup_video()
-	def select_roi(image):
-		image = cv.cvtColor(image, cv.COLOR_GRAY2RGB)
-		roi_points = []
-		def mouse_callback(event, x, y, flags, param):
-			if event == cv.EVENT_LBUTTONDOWN:
-				roi_points.append((x, y))
-				cv.circle(image, (x, y), 5, (0, 255, 0), -1)
-				cv.imshow("Select ROI", image)
-		cv.imshow("Select ROI", image)
-		cv.setMouseCallback("Select ROI", mouse_callback)
-		cv.waitKey(0)
-		cv.destroyAllWindows()
-		image = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
-	
-		if len(roi_points) > 2:
-			roi_points = np.array(roi_points)
-			mask = np.zeros_like(image)
-			cv.fillPoly(mask, [roi_points], (255, 255, 255))
-			return mask
-		else:
-			mask = np.ones_like(image)
-			return mask
+
+  def select_roi(image):
+    image = cv2.cvtColor(image, cv.COLOR_GRAY2RGB)
+    roi_points = []
+    def mouse_callback(event, x, y, flags, param):
+      if event == cv.EVENT_LBUTTONDOWN:
+        roi_points.append((x,y))
+        cv2.cirvle(image, (x,y), 5, (0,255,0), -1)
+        cv2.imshow("Select ROI", image)
+      cv2.imshow("Select ROI", image)
+      cv2.setMouseCallback("Select ROI", mouse_callback)
+      cv2.waitKey(0)
+      cv2.destroyAllWindows()
+      image = cv2.cvtColor(image, cv.COLOR_RGB2GRAY)
+      if len(roi_points) > 2:
+        roi_points = np.array(roi_points)
+        mask = np.zeros_like(image)
+        cv2.fillPoly(mask, [roi_points], (255, 255, 255))
+        return mask
+      else:
+        mask = np.ones_like(image)
+        return mask
 	
   # Create the KNN background subtractor.
   bg_subtractor = cv2.createBackgroundSubtractorKNN()
@@ -50,7 +50,7 @@ with Lepton() as camera:
   while True:
     # Read the current frame from the video.
     img = camera.grab().astype(np.float32)
-		T, threshold = cv.threshold(img, 3000, 5000, cv.THRESH_BINARY)
+		T, threshold = cv2.threshold(img, 3000, 5000, cv2.THRESH_BINARY)
 		img2 = 255*(img - img.min())/(img.max()-img.min())
 		imgu = img2.astype(np.uint8)
 
@@ -59,7 +59,7 @@ with Lepton() as camera:
 			mask = masku.astype(np.float32)
 			FirstRunTest = False
 		if FirstRunTest is False:
-			masked = cv.bitwise_and(threshold, mask)
+			masked = cv2.bitwise_and(threshold, mask)
 		frame = masked.astype(np.uint8)
 
     # Apply the KNN background subtractor to get the foreground mask.
