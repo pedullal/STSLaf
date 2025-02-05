@@ -4,8 +4,7 @@ from flirpy.camera.lepton import Lepton
 
 with Lepton() as camera:
   camera.setup_video()
-
-	def select_roi(image):
+  def select_roi(image):
 		image = cv.cvtColor(image, cv.COLOR_GRAY2RGB)
 		roi_points = []
 		def mouse_callback(event, x, y, flags, param):
@@ -27,7 +26,7 @@ with Lepton() as camera:
 		else:
 			mask = np.ones_like(image)
 			return mask
-
+	
   # Create the KNN background subtractor.
   bg_subtractor = cv2.createBackgroundSubtractorKNN()
 
