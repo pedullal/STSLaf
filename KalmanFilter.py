@@ -44,7 +44,7 @@ with Lepton() as camera:
   # Counter to keep track of the number of history frames populated.
   num_history_frames_populated = 0
 	
-	FirstRunTest = True
+  FirstRunTest = True
 
   # Start processing each frame of the video.
   while True:
